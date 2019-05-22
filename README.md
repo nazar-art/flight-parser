@@ -2,18 +2,18 @@
 
 You need to have `Java 8` installed on your workstation for launching the application.
 
-If you want to use your IDE you need to add support of Lombok to it.
+If you want to use your IDE you need to add support of Lombok to it.  
 For IntelliJ Idea -> install `Lombok plugin` and activate `Enable annotation processing` in project Settings after importing.
 
 #### For launching application, you have few options:
 
  - from console:
     
-    gradle bootRun
+    `gradle bootRun`
     
  - from IDE:
  
-    run class `net.lelyak.FlightParserAppApplication` 
+    `run class net.lelyak.FlightParserAppApplication` 
     
 You will see in console that application started:
 
