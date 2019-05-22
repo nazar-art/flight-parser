@@ -4,11 +4,8 @@ import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
-import net.lelyak.model.BaseDTO;
 import net.lelyak.model.FlightDataDTO;
-import net.lelyak.utills.FileLocation;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
@@ -16,8 +13,10 @@ import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Nazar Lelyak.
@@ -26,8 +25,8 @@ import java.util.Set;
 @Component
 public class CsvReader implements Reader {
 
-    @Autowired
-    private FileLocation locationProperties;
+//    @Autowired
+//    private FileLocation locationProperties;
 
     @Override
     public String getFilePath() {
@@ -37,7 +36,7 @@ public class CsvReader implements Reader {
 
     @Override
     public List<FlightDataDTO> parseFile() {
-        log.info("FILE PARSING START");
+        log.debug("FILE PARSING START");
         List<FlightDataDTO> flightData = Lists.newArrayList();
         String csvFile = getFilePath();
 
@@ -49,12 +48,17 @@ public class CsvReader implements Reader {
             reader.readNext(); // skip the first column line
 
             while ((line = reader.readNext()) != null) {
+
+                LocalTime departureTime = parseTime(line[0]);
+                String ifDeparted = departureTime.isBefore(LocalTime.now()) ? "DEPARTED" : "";
+
                 var dto = FlightDataDTO.builder()
-                        .departureTime(parseTime(line[0]))
+                        .departureTime(departureTime)
                         .destination(line[1])
                         .destinationAirport(line[2])
                         .flightNumber(line[3])
                         .days(parseDays(line[4], line[5], line[6], line[7], line[8], line[9], line[10]))
+                        .isDeparted(ifDeparted)
                         .build();
 
                 flightData.add(dto);
@@ -66,18 +70,23 @@ public class CsvReader implements Reader {
         // display all flights for the current day and time, in chronological order.
         // Flights that are in the past should be displayed as "Departed"
 
+        log.debug("FILE PARSING END");
+
+        return sortTodayFlights(flightData);
+    }
+
+    private List<FlightDataDTO> sortTodayFlights(List<FlightDataDTO> flightData) {
         LocalDate today = LocalDate.now();
         DayOfWeek todayDayOfWeek = today.getDayOfWeek();
+        log.info("Today: {} day is: {}", today, todayDayOfWeek);
 
-//        flightData.stream()
-//                .map(d -> {
-//                    if (d.getDays().contains(todayDayOfWeek)) {
-//
-//                    }
-//                })
+        List<FlightDataDTO> sortedForToday = flightData.stream()
+                .filter(d -> d.getDays().contains(todayDayOfWeek))
+                .sorted(Comparator.comparing(FlightDataDTO::getDepartureTime))
+                .collect(Collectors.toList());
 
-        log.info("FILE PARSING END");
-        return flightData;
+        log.debug("Sorted for today: {}", sortedForToday);
+        return sortedForToday;
     }
 
     private LocalTime parseTime(String str) {
@@ -94,9 +103,9 @@ public class CsvReader implements Reader {
     }
 
     private Set<DayOfWeek> parseDays(String sunday, String monday,
-                                      String tuesday, String wednesday,
-                                      String thursday, String friday,
-                                      String saturday) {
+                                     String tuesday, String wednesday,
+                                     String thursday, String friday,
+                                     String saturday) {
         Set<DayOfWeek> result = Sets.newHashSet();
 
         if (StringUtils.isNotEmpty(sunday)) result.add(DayOfWeek.SUNDAY);
@@ -108,13 +117,5 @@ public class CsvReader implements Reader {
         if (StringUtils.isNotEmpty(saturday)) result.add(DayOfWeek.SATURDAY);
 
         return result;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public static void main(String[] args) {
-        Reader reader = new CsvReader();
-        List<BaseDTO> baseDTO = (List<BaseDTO>) reader.parseFile();
-        baseDTO.forEach(System.out::println);
     }
 }

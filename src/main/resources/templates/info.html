@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Flights Info Page</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+
+        <div th:if="${not #lists.isEmpty(flights)}">
+
+            <h3>Flights for <a th:text="${day}"/>, <a th:text="${date}"/>:</h3>
+
+            <table class="table table-striped">
+                <tr>
+                    <th>Status:</th>
+                    <th>Flight Number:</th>
+                    <th>Departure Time:</th>
+                    <th>Destination:</th>
+                    <th>Destination Airport:</th>
+                </tr>
+                <tr th:each="flight : ${flights}">
+                    <td th:text="${flight.isDeparted}"></td>
+                    <td th:text="${flight.flightNumber}"></td>
+                    <td th:text="${flight.departureTime}"></td>
+                    <td th:text="${flight.destination}"></td>
+                    <td th:text="${flight.destinationAirport}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
