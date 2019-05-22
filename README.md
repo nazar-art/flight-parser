@@ -23,4 +23,8 @@ For IntelliJ Idea -> install `Lombok plugin` and activate `Enable annotation pro
     
 You can access following URL in a browser:
 
-    http://localhost:8080/    
+    http://localhost:8080/  
+    
+You have to see something like following:
+
+![Flights application main page](flight-app-main-page.png)      
