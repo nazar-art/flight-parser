@@ -53,7 +53,7 @@ public class CsvReader implements Reader {
                 LocalTime departureTime = parseTime(line[0]);
                 String ifDeparted = departureTime.isBefore(LocalTime.now()) ? "DEPARTED" : "";
 
-                var dto = FlightDataDTO.builder()
+                FlightDataDTO dto = FlightDataDTO.builder()
                         .departureTime(departureTime)
                         .destination(line[1])
                         .destinationAirport(line[2])

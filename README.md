@@ -1,6 +1,6 @@
 #### Requirements:
 
-You need to have `Java 11` installed on your workstation for launching the application.
+You need to have `Java 8` installed on your workstation for launching the application.
 
 If you want to use your IDE you need to add support of Lombok to it.
 For IntelliJ Idea -> install `Lombok plugin` and activate `Enable annotation processing` in project Settings after importing.
@@ -15,11 +15,9 @@ For IntelliJ Idea -> install `Lombok plugin` and activate `Enable annotation pro
  
     run class `net.lelyak.FlightParserAppApplication` 
     
-    
-    
-##### After you will see in console that application started:
+You will see in console that application started:
 
-    net.lelyak.FlightParserAppApplication    : Started
+    net.lelyak.FlightParserAppApplication    : Started FlightParserAppApplication in ... seconds
     
 You can access following URL in a browser:
 
