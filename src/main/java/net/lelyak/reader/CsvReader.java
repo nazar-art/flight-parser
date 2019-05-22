@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import net.lelyak.model.FlightDataDTO;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
@@ -25,13 +26,13 @@ import java.util.stream.Collectors;
 @Component
 public class CsvReader implements Reader {
 
-//    @Autowired
-//    private FileLocation locationProperties;
+    @Value( "${flight.data.file}" )
+    private String file;
+
 
     @Override
     public String getFilePath() {
-//        return locationProperties.getFile();
-        return "src/main/resources/data/flights.csv";
+        return file;
     }
 
     @Override

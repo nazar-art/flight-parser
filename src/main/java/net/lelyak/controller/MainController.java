@@ -39,7 +39,9 @@ public class MainController {
         return "/info";
     }
 
-
+    /**
+     * Error handling.
+     */
     @GetMapping("/error")
     public String error403() {
         log.error("Error occurred");

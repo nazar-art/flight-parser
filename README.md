@@ -1,6 +1,9 @@
 #### Requirements:
 
-You need to have `Java 11` installed for launching the application.
+You need to have `Java 11` installed on your workstation for launching the application.
+
+If you want to use your IDE you need to add support of Lombok to it.
+For IntelliJ Idea -> install `Lombok plugin` and activate `Enable annotation processing` in project Settings after importing.
 
 #### For launching application, you have few options:
 
