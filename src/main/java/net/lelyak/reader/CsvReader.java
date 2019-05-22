@@ -86,7 +86,7 @@ public class CsvReader implements Reader {
                 .sorted(Comparator.comparing(FlightDataDTO::getDepartureTime))
                 .collect(Collectors.toList());
 
-        log.debug("Sorted for today: {}", sortedForToday);
+        log.debug("SORTED_FLIGHTS: {}", sortedForToday);
         return sortedForToday;
     }
 
@@ -98,8 +98,9 @@ public class CsvReader implements Reader {
             time = LocalTime.of(Integer.valueOf(arr[0]), Integer.valueOf(arr[1]));
             return time;
         } else {
-            log.error("Departure time is incorrect: {}", str);
+            log.error("DEPARTURE_TIME is incorrect: {}", str);
         }
+        log.debug("DEPARTURE_TIME: {}", time);
         return time;
     }
 
