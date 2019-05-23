@@ -1,4 +1,4 @@
-package net.lelyak.reader;
+package net.lelyak.service;
 
 import net.lelyak.model.BaseDTO;
 

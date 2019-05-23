@@ -1,10 +1,12 @@
-package net.lelyak.reader;
+package net.lelyak.service.impl;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
-import net.lelyak.model.FlightDataDTO;
+import net.lelyak.model.impl.FlightDataDTO;
+import net.lelyak.service.Reader;
+import net.lelyak.utills.Clock;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Component;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class CsvReader implements Reader {
+public class CsvFileReader implements Reader {
 
     @Value( "${flight.data.file}" )
     private String file;
@@ -51,7 +52,7 @@ public class CsvReader implements Reader {
             while ((line = reader.readNext()) != null) {
 
                 LocalTime departureTime = parseTime(line[0]);
-                String ifDeparted = departureTime.isBefore(LocalTime.now()) ? "DEPARTED" : "";
+                String ifDeparted = departureTime.isBefore(Clock.getCurrentTime()) ? "DEPARTED" : "";
 
                 FlightDataDTO dto = FlightDataDTO.builder()
                         .departureTime(departureTime)
@@ -68,21 +69,16 @@ public class CsvReader implements Reader {
             log.error("Error during parsing CSV file: {}", e.getMessage());
         }
 
-        // display all flights for the current day and time, in chronological order.
-        // Flights that are in the past should be displayed as "Departed"
-
         log.debug("FILE PARSING END");
 
+        // display all flights for the current day and time, in chronological order.
+        // Flights that are in the past should be displayed as "Departed"
         return sortTodayFlights(flightData);
     }
 
     private List<FlightDataDTO> sortTodayFlights(List<FlightDataDTO> flightData) {
-        LocalDate today = LocalDate.now();
-        DayOfWeek todayDayOfWeek = today.getDayOfWeek();
-        log.info("Today: {} day is: {}", today, todayDayOfWeek);
-
         List<FlightDataDTO> sortedForToday = flightData.stream()
-                .filter(d -> d.getDays().contains(todayDayOfWeek))
+                .filter(d -> d.getDays().contains(Clock.getCurrentDay()))
                 .sorted(Comparator.comparing(FlightDataDTO::getDepartureTime))
                 .collect(Collectors.toList());
 

@@ -1,4 +1,4 @@
-package net.lelyak.model;
+package net.lelyak.model.impl;
 
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.lelyak.model.BaseDTO;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
