@@ -28,6 +28,8 @@ public class MainController {
     public String flightsInfo(Model model) {
         List<? extends BaseDTO> sortedFlights = reader.parseFile();
 
+        log.info("Today's date: {} and time: {}", Clock.getCurrentDate(), Clock.getCurrentDay());
+
         model.addAttribute("flights", sortedFlights);
         model.addAttribute("date", Clock.getCurrentDate());
         model.addAttribute("day", Clock.getCurrentDay());

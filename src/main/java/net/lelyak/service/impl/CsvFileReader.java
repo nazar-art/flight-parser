@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +54,7 @@ public class CsvFileReader implements Reader {
 
                 LocalTime departureTime = parseTime(line[0]);
                 String ifDeparted = departureTime.isBefore(Clock.getCurrentTime()) ? "DEPARTED" : "";
+                log.debug("CURRENT_TIME: {}", Clock.getCurrentTime());
 
                 FlightDataDTO dto = FlightDataDTO.builder()
                         .departureTime(departureTime)
@@ -77,12 +79,13 @@ public class CsvFileReader implements Reader {
     }
 
     private List<FlightDataDTO> sortTodayFlights(List<FlightDataDTO> flightData) {
+        log.info("Current day: {}", Clock.getCurrentDay());
         List<FlightDataDTO> sortedForToday = flightData.stream()
                 .filter(d -> d.getDays().contains(Clock.getCurrentDay()))
                 .sorted(Comparator.comparing(FlightDataDTO::getDepartureTime))
                 .collect(Collectors.toList());
 
-        log.debug("SORTED_FLIGHTS: {}", sortedForToday);
+        log.debug("SORTED_FLIGHTS: {}", Arrays.toString(sortedForToday.toArray()));
         return sortedForToday;
     }
 

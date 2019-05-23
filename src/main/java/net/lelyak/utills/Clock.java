@@ -38,20 +38,14 @@ public final class Clock {
      * Different formats for current dateTime.
      */
     public static LocalDate getCurrentDate() {
-        LocalDate currentDate = getCurrentDateTime().toLocalDate();
-        log.debug("CURRENT_DATE: {}", currentDate);
-        return currentDate;
+        return getCurrentDateTime().toLocalDate();
     }
 
     public static LocalTime getCurrentTime() {
-        LocalTime currentTime = getCurrentDateTime().toLocalTime();
-        log.debug("CURRENT_TIME: {}", currentTime);
-        return currentTime;
+        return getCurrentDateTime().toLocalTime();
     }
 
     public static DayOfWeek getCurrentDay() {
-        DayOfWeek currentDay = getCurrentDateTime().getDayOfWeek();
-        log.debug("CURRENT_DAY: {}", currentDay);
-        return currentDay;
+        return getCurrentDateTime().getDayOfWeek();
     }
 }
