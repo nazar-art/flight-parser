@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <title>Error page</title>
+
     <div th:replace="fragments/header :: header-css"/>
 </head>
 
@@ -12,10 +14,11 @@
 <div class="container">
 
     <div class="starter-template">
-        <!--responce code-->
-        <h1>Sorry, we really did our best, but some shit happens sometimes :(</h1>
+        <!--response code-->
+        <h1>Sorry, we really did our best
+            However, some shit happens sometimes :( </h1>
 
-        <div th:inline="text">Some error happen. Sorry for unconvinced.</div>
+        <div th:inline="text">Some error occurred. Sorry for unconvinced.</div>
     </div>
 
 </div>

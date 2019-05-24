@@ -24,14 +24,14 @@ public class MainController {
     /**
      * List all flights.
      */
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/info", "/info.html", "/flights"})
     public String flightsInfo(Model model) {
         List<? extends BaseDTO> sortedFlights = reader.parseFile();
 
         log.info("Today's date: {} and time: {}", Clock.getCurrentDate(), Clock.getCurrentDay());
 
         model.addAttribute("flights", sortedFlights);
-        model.addAttribute("date", Clock.getCurrentDate());
+        model.addAttribute("dateTime", Clock.getCurrentDateTime());
         model.addAttribute("day", Clock.getCurrentDay());
 
         log.debug("Flights are returned");
@@ -42,7 +42,7 @@ public class MainController {
      * Handling errors.
      */
     @GetMapping("/error")
-    public String error403() {
+    public String error() {
         log.error("Error occurred");
         return "/error";
     }

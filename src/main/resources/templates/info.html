@@ -15,10 +15,12 @@
 
     <div class="starter-template">
 
+            <h3>Flights for:
+                <a th:text="${day}"/>
+                <a th:text="${#temporals.format(dateTime, ' - dd/MM/yyyy - HH:mm')}"/>
+            </h3>
+
         <div th:if="${not #lists.isEmpty(flights)}">
-
-            <h3>Flights for <a th:text="${day}"/>, <a th:text="${date}"/>:</h3>
-
             <table class="table table-striped">
                 <tr>
                     <th>Status:</th>

@@ -9,7 +9,7 @@ import net.lelyak.service.Reader;
 import net.lelyak.utills.Clock;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
  * @author Nazar Lelyak.
  */
 @Slf4j
-@Component
+@Service
 public class CsvFileReader implements Reader {
 
-    @Value( "${flight.data.file}" )
+    @Value("${flight.data.file}")
     private String file;
 
 
