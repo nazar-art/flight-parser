@@ -20,15 +20,18 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// SPRING BOOT
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+	
+	// UTILS
+	compileOnly 'org.projectlombok:lombok'
+//	annotationProcessor 'org.projectlombok:lombok'
 	compile 'com.google.guava:guava:23.0'
 	compile 'net.sf.opencsv:opencsv:2.3'
 	compile 'commons-lang:commons-lang:2.6'
 
+	// WEB
 	compile 'org.webjars:bootstrap:4.3.1'
 }

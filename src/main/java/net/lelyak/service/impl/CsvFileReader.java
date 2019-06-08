@@ -80,6 +80,7 @@ public class CsvFileReader implements Reader {
 
     private List<FlightDataDTO> sortTodayFlights(List<FlightDataDTO> flightData) {
         log.info("Current day: {}", Clock.getCurrentDay());
+
         List<FlightDataDTO> sortedForToday = flightData.stream()
                 .filter(d -> d.getDays().contains(Clock.getCurrentDay()))
                 .sorted(Comparator.comparing(FlightDataDTO::getDepartureTime))
