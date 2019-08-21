@@ -1,12 +1,15 @@
 # ===============================
 # = CSV FILE LOCATION
 # ===============================
-flight.data.file=src/main/resources/data/flights.csv
+flight:
+  data:
+    file: src/main/resources/data/flights.csv
 
 
 # ===============================
 # = LOGGING
 # ===============================
-logging.level.org.springframework.web=DEBUG
-logging.level.net.lelyak=DEBUG
-
+logging:
+  level:
+    net:
+      lelyak: DEBUG
