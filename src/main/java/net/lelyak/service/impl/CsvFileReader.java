@@ -85,7 +85,7 @@ public class CsvFileReader implements Reader {
         String[] arr = strTime.split(":");
 
         if (arr.length == 2) {
-            return LocalTime.of(Integer.valueOf(arr[0]), Integer.valueOf(arr[1]));
+            return LocalTime.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]));
         } else {
             throw new RuntimeException("DEPARTURE_TIME is incorrect " + strTime);
         }
