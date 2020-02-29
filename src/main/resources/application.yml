@@ -13,6 +13,3 @@ logging:
   level:
     net:
       lelyak: DEBUG
-
-server:
-  port: 8081
