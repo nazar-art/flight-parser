@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <title>Flights Info Page</title>
-
-    <div th:replace="fragments/header :: header-css"/>
 </head>
 
 <body>
+<header>
+    <div th:replace="fragments/header :: header-css"></div>
+</header>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: header"></div>
 
 <div class="container">
 
     <div class="starter-template">
 
-            <h3>Flights for:
-                <a th:text="${day}"/>
-                <a th:text="${#temporals.format(dateTime, ' - dd/MM/yyyy - HH:mm')}"/>
+            <h3>Flights for <a th:text="${day}">: </a>
+                <span th:text="${#temporals.format(dateTime, 'd/M/yyyy, HH:mm:ss')}"></span>
             </h3>
 
         <div th:if="${not #lists.isEmpty(flights)}">
@@ -43,7 +43,7 @@
 </div>
 <!-- /.container -->
 
-<div th:replace="fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

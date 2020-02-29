@@ -1,6 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
+<body>
+<header>
     <div th:fragment="header-css">
         <!-- this is header-css -->
         <link rel="stylesheet" type="text/css"
@@ -9,9 +11,8 @@
         <link rel="stylesheet" th:href="@{/css/main.css}"
               href="../../static/css/main.css"/>
     </div>
-</head>
+</header>
 
-<body>
 <div th:fragment="header">
     <!-- this is header -->
     <nav class="navbar navbar-inverse">
@@ -21,7 +22,6 @@
                 <a class="navbar-brand" th:href="@{/info}">Airport Information Display</a>
             </div>
         </div>
-
     </nav>
 </div>
 

@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <title>Error page</title>
-
-    <div th:replace="fragments/header :: header-css"/>
 </head>
 
 <body>
+<header>
+    <div th:replace="fragments/header :: header-css"></div>
+</header>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-
     <div class="starter-template">
         <!--response code-->
         <h1>Sorry, we really did our best
@@ -20,11 +20,10 @@
 
         <div th:inline="text">Some error occurred. Sorry for inconvenience.</div>
     </div>
-
 </div>
 <!-- /.container -->
 
-<div th:replace="fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

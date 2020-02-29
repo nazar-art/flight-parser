@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -41,9 +42,7 @@ public class CsvFileReader implements Reader {
         List<FlightDataDTO> flightData = Lists.newArrayList();
         String csvFile = getFilePath();
 
-        CSVReader reader;
-        try {
-            reader = new CSVReader(new FileReader(csvFile));
+        try (CSVReader reader = new CSVReader(new BufferedReader(new FileReader(csvFile)))) {
             String[] line;
 
             reader.readNext(); // skip the first line - with column names

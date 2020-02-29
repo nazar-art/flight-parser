@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @AllArgsConstructor
-public class MainController {
+public class FlightController {
 
     private Reader reader;
 
